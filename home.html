@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+     <style>
+        body{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color:  #ffc5d3;
+    height: 100vh;
+    align-items: center;
+    overflow: hidden;
+}
+
+h1{
+    position: relative;
+    top: 30px;
+    font-family: "Trirong", serif;
+}
+
+.rose{
+    width: 100px;
+    height: 500px;
+    position: absolute;
+    display: inline-block;
+    animation: yid 5s infinite;
+    transform: translateY(40%);
+    right: 700px;
+    margin-top: -27px;
+    
+}
+
+.petal{
+    width: 60px;
+    height: 60px;
+    border-radius: 0px 50%;
+    position: absolute;
+    background: #fe7696;
+    box-shadow: 0 0 20px #f03a64, 0 0 20px #d1123f; /* Glow effect */
+    z-index: 2;
+    transform-origin: bottom right;
+    animation: zhanki2 10s infinite;
+}
+
+.petal:nth-child(2) {
+    transform-origin: right bottom;
+    transform: rotate(90deg);
+    background: #fe7696;
+    left: -10px;
+    animation: zhanki1 10s infinite;
+}
+
+.petal:nth-child(3) {
+    width: 60px;
+    height: 60px;
+     left: 10px;
+     z-index: 1;
+     top: -20px;
+     background: #f03a64;
+     transform-origin: bottom right;
+     animation: zhanki2 10s infinite;
+}
+
+.petal:nth-child(4) {
+    transform: rotate(90deg);
+    width: 50px;
+    height: 50px;
+    left: 0;
+    top: -20px;
+    z-index: 1;
+    background: #f03a64;
+    transform-origin: bottom right;
+    animation: zhanki1 10s infinite;
+}
+
+.petal:nth-child(5) {
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    left: 25px;
+    top: -30px;
+    z-index: 0;
+    background: #d1123f;
+    box-shadow: 0 0 20px #d1123f, 0 0 30px #f03a64; /* Glow effect */
+}
+
+.leaf{
+    position: absolute;
+    top: 110px;
+    left: -113px;
+}
+
+.stem{
+    width: 240px;
+    height: 79px;
+    background: transparent;
+    border: 8px solid #8ac78a;
+    border-color: #77a377  transparent transparent transparent;
+    border-radius: 50% 50%;
+    transform: rotate(100deg);
+    filter: drop-shadow(0 0 10px #77a377); /* Glow effect for the stem */
+}
+
+.leafs{
+    width: 60px;
+    height: 50px;
+    border-radius: 0px 50%;
+    background: #77a377;
+    position: absolute;
+    top: 0;
+    left: 115px;
+    z-index: 0;
+    filter: drop-shadow(0 0 10px #77a377); /* Glow for the second leaf */
+}
+
+.leafs:nth-child(2) {
+    width: 50px;
+    height: 30px;
+    top: 40px;
+    left: 165px;
+    transform: rotate(120deg);
+    filter: drop-shadow(0 0 10px #77a377); /* Glow for the second leaf */
+}
+@keyframes yid{
+    50%{
+        transform: translateY(35%);
+    }
+    100%{
+        transform: translateY(40%);
+    }
+}
+
+.heart {
+    position: absolute;
+    width: 20px; /* Adjust heart size */
+    height: 20px; /* Adjust heart size */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4.248c-3.148-5.402-12-3.252-12 4.604 0 4.688 9.422 9.905 12 12.702 2.578-2.797 12-8.014 12-12.702 0-7.856-8.852-10.006-12-4.604z' fill='red'/%3E%3C/svg%3E"); /* Heart SVG */
+    background-size: cover;
+    animation: fall linear infinite; /* Animate the hearts */
+    opacity: 0.7; /* Make hearts slightly transparent */
+}
+
+@keyframes fall {
+    0% {
+        top: -50px; /* Start above the viewport */
+        opacity: 0; /* Start invisible */
+    }
+    25% {
+        opacity: 0.7; /* Fade in */
+    }
+    100% {
+        top: 100vh; /* Fall to the bottom */
+    }
+}
+ </style>
+</head>
+
+<audio id="song" src="happy with u.mp3"></audio>
+
+<body>
+    <h1>HAPPY VALENTINE'S MY LOVE
+        <br>I LOVE YOU
+    </h1>
+    <div class="container">
+        <div class="rose">
+            <div class="flower">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+            <div class="leaf">
+                <div class="stem"></div>
+                <div class="leafs"></div>
+                <div class="leafs"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const numHearts = 20; // Reduced number of hearts
+     
+     // Call createHeart AFTER the DOM is fully loaded
+     window.addEventListener('DOMContentLoaded', () => {  // * KEY FIX *
+         for (let i = 0; i < numHearts; i++) {
+             createHeart();
+         }
+     });
+     
+     function createHeart() {
+         const heart = document.createElement('div');
+         heart.classList.add('heart');
+     
+         // Random horizontal position (applied AFTER append)
+         heart.style.top = '-50px'; // Initial position above viewport
+     
+         document.body.appendChild(heart); // Append FIRST
+     
+         heart.style.left = Math.random() * 100 + 'vw'; // THEN apply random left
+     
+         // Random animation duration (so hearts fall at different speeds)
+         const duration = Math.random() * 8 + 5; // between 5 and 13 seconds
+         heart.style.animationDuration = duration + 's';
+     
+         // Random delay so hearts don't all start at the same time
+         heart.style.animationDelay = Math.random() * duration + 's';
+     
+         // Slightly larger hearts for softer look (optional)
+         heart.style.width = heart.style.height = Math.random() * 10 + 20 + 'px'; // Random size up to 30px
+     
+     
+         heart.addEventListener('animationiteration', () => {
+             heart.remove();
+             createHeart();
+         });
+     }
+
+     window.addEventListener('click', () => {
+    document.getElementById("song").play();
+  });
+     </script>
+</body>
+</html>
